@@ -1,39 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paeon</title>
-</head>
-<body>
-  <form action="{% url 'main:index' %}" method="GET">
-    <div>
-      <label style="margin: 1rem">
-        사업자등록번호
-        <input name="registration_number" value="{{ registration_number }}" style="width: 500px">
-      </label>
-    </div>
-    <div style="margin: 1rem">
-      <label>
-        회사명
-        <input name="registration_name" value="{{ registration_name }}" style="width: 500px">
-      </label>
-    </div>
-    <div style="margin: 1rem">
-      <button type="submit">검색</button>
-    </div>
-  </form>  
-  <hr>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paeon</title>
 
-  <div>
-    {% for company in company_list %}
-      <p>
-        {% for label, value in company %}
-          {{ label }} : {{ value }} ,
-        {% endfor %}
-      </p>
-    {% endfor %}
-  </div>
-</body>
+    <style>
+      .m-1 {
+        margin: 1rem;
+      }
+      .btn {
+        color: black;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="{% url 'main:index' %}" method="GET">
+      <div class="m-1">
+        <label>
+          사업자등록번호
+          <input
+            name="registration_number"
+            value="{{ registration_number }}"
+            style="width: 500px"
+          />
+        </label>
+      </div>
+      <div class="m-1">
+        <label>
+          회사명
+          <input
+            name="registration_name"
+            value="{{ registration_name }}"
+            style="width: 500px"
+          />
+        </label>
+      </div>
+      <div class="m-1">
+        <button type="submit">검색</button>
+      </div>
+    </form>
+    <hr />
+
+    <div>  
+      {% for company in company_list %}
+        <p>
+          {% for label, value in company %}
+            {% if label == 'name' %}
+              <button onclick="copyToClipboard('{{ value }}')" class="btn">복사하기</button>
+            {% endif %}
+            
+            {{ label }} : {{ value }},
+          {% endfor %}
+        </p>
+      {% endfor %}
+    </div>
+
+    <script>
+      function copyToClipboard(str) {
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = str;
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+      }
+    </script>
+  </body>
 </html>
