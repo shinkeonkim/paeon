@@ -16,3 +16,5 @@
 1. 사업자등록번호를 입력합니다.
 2. 상호명으로 유추되는 회사명 입력 (여러개를 동시에 집어넣어도 됩니다.)
 3. 검색 후 목록 보기
+
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/47373998/164462297-d7a32df2-f414-4638-a64f-2abf96049348.png">
