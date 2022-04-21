@@ -54,9 +54,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRDPARTY_APPS  = [
-    'django_browser_reload',
-]
+THIRDPARTY_APPS  = []
 
 PRPJECT_APPS = [
     'main',    
@@ -72,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
