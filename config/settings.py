@@ -36,6 +36,8 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
+SERVICE_KEY = env('SERVICE_KEY')
+
 # Application definition
 
 DJANGO_APPS = [
@@ -47,7 +49,9 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRDPARTY_APPS  = []
+THIRDPARTY_APPS  = [
+    'django_browser_reload',
+]
 
 PRPJECT_APPS = [
     'main',    
@@ -63,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
