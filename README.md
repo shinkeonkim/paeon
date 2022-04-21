@@ -1,4 +1,6 @@
-# RAEON
+# PAEON
+
+사업자등록번호와 대략적 상호명을 입력하여, 정확한 상호명을 추려내는 사이트
 
 ## Dev
 
@@ -8,3 +10,9 @@
 > pip install -r requirements.txt
 > python manage.py runserver
 ```
+
+## How to use
+
+1. 사업자등록번호를 입력합니다.
+2. 상호명으로 유추되는 회사명 입력 (여러개를 동시에 집어넣어도 됩니다.)
+3. 검색 후 목록 보기
