@@ -5,7 +5,7 @@ from xml.etree import ElementTree as elemTree
 from difflib import SequenceMatcher
 
 API_URL = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch'
-MAX_RESULT_SIZE = 1000000
+MAX_RESULT_SIZE = 100000
 
 def similar(a: str, b: str):
     return SequenceMatcher(None, a, b).ratio()
