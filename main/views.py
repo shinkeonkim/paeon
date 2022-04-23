@@ -9,7 +9,7 @@ def index(request):
     response = {
         'registration_number': registration_number or '',
         'registration_name': registration_name or '',
-        'parsed_registration_number': parse_registration_number(registration_number),
+        'parsed_registration_number': parse_registration_number(registration_number or ''),
         'keyword': keyword or ''
     }
     
