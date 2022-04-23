@@ -1,0 +1,39 @@
+<table class="table is-striped is-bordered is-fullwidth text-center">
+  <thead>
+    <tr>
+      <th> 복사하기 </th>
+      <th> 상호명 </th>
+
+      <th> 사업자등록번호 </th>
+      <th> 사업장 주소 </th>
+      <th> 생성일자 </th>
+      <th> seq(API 상 id) </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for company in company_list %}
+      <tr>
+
+      {% for label, value in company %}
+        {% if label == 'name' %}
+          <th>
+            <button onclick="copyToClipboard('{{ value }}')" class="btn">복사하기</button>
+          </th>
+        {% endif %}
+        <td>
+          {{ value }}
+        </td>        
+      {% endfor %}
+      </tr>
+    {% empty %}
+      {% if registration_number != '' and registration_name != '' %}
+        <tr>
+          <td colspan="6">
+            <p class="text-center"> 검색결과가 없습니다. 사업자등록번호 또는 키워드가 올바른지 확인해주세요. </p>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
