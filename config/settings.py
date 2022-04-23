@@ -19,7 +19,8 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    API_DEV_MODE=(bool, False),
 )
 
 environ.Env.read_env(
@@ -34,6 +35,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+API_DEV_MODE = env('API_DEV_MODE')
 
 ALLOWED_HOSTS = [
     '127.0.0.1',

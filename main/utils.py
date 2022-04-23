@@ -1,9 +1,13 @@
-import requests
 from django.conf import settings 
-from xml.etree import ElementTree as elemTree
+from django.conf import settings
 
+import requests
+from xml.etree import ElementTree as elemTree
 from difflib import SequenceMatcher
 
+from .dump import DUMP
+
+API_DEV_MODE = settings.API_DEV_MODE
 API_URL = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch'
 MAX_RESULT_SIZE = 100000
 
@@ -52,7 +56,7 @@ def get_similar_company_list_by_registration(registration_name: str, registratio
     keyword = (keyword or "").strip()
 
     registration_number = parse_registration_number(registration_number)
-    result = parse_openapi_result(get_openapi_result(registration_number, keyword))    
+    result = DUMP if API_DEV_MODE else parse_openapi_result(get_openapi_result(registration_number, keyword))    
     result.sort(key = lambda t: (-similar(t[0][1], registration_name), -int(t[4][1])))
     
     return result
