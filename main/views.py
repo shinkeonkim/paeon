@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .utils import get_similar_company_list_by_registration
+from .utils import get_similar_company_list_by_registration, parse_registration_number
 
 def index(request):
     registration_number = request.GET.get('registration_number')
@@ -9,6 +9,7 @@ def index(request):
     response = {
         'registration_number': registration_number or '',
         'registration_name': registration_name or '',
+        'parsed_registration_number': parse_registration_number(registration_number),
         'keyword': keyword or ''
     }
     

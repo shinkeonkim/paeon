@@ -28,11 +28,7 @@
       </tr>
     {% empty %}
       {% if registration_number != '' and registration_name != '' %}
-        <tr>
-          <td colspan="6">
-            <p class="text-center"> 검색결과가 없습니다. 사업자등록번호 또는 키워드가 올바른지 확인해주세요. </p>
-          </td>
-        </tr>
+        {% include '_empty.dj.html' %}
       {% endif %}
     {% endfor %}
   </tbody>

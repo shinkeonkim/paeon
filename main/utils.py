@@ -45,7 +45,7 @@ def parse_openapi_result(text: str):
     return result
 
 def parse_registration_number(registration_number: str):
-    return registration_number.replace('-', '')[:6]
+    return registration_number.replace('-', '')
 
 def parse_registration_name(registration_name: str):
     return registration_name.replace('주식회사', '').replace('(주)', '')
@@ -56,7 +56,7 @@ def get_similar_company_list_by_registration(registration_name: str, registratio
     keyword = (keyword or "").strip()
 
     registration_number = parse_registration_number(registration_number)
-    result = DUMP if API_DEV_MODE else parse_openapi_result(get_openapi_result(registration_number, keyword))    
+    result = DUMP if API_DEV_MODE else parse_openapi_result(get_openapi_result(registration_number[:6], keyword))    
     result.sort(key = lambda t: (-similar(t[0][1], registration_name), -int(t[4][1])))
     
     return result
