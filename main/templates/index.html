@@ -1,97 +1,96 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paeon</title>
+{% extends 'base.html' %}
 
-    <style>
-      .m-1 {
-        margin: 1rem;
-      }
-      .btn {
-        color: black;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <form action="{% url 'main:index' %}" method="GET">
-      <div class="m-1">
-        <label>
-          사업자등록번호
-          <input
-            name="registration_number"
-            value="{{ registration_number }}"
-            style="width: 500px"
-            required="true"
-          />
-        </label>
-      </div>
-      <div class="m-1">
-        <label>
-          회사명
-          <input
-            name="registration_name"
-            value="{{ registration_name }}"
-            style="width: 500px"
-            required="true"
-          />
-        </label>
-      </div>
-      <div class="m-1">
-        <label>
-          필수 키워드
-          <input name="keyword" value="{{ keyword }}" style="width: 500px" />
-        </label>
-      </div>
-      <div class="m-1">
-        <button type="submit">검색</button>
-      </div>
-    </form>
+{% block stylesheet %}
+<style>
+  .m-1 {
+    margin: 1rem;
+  }
+  .btn {
+    color: black;
+    cursor: pointer;
+  }
+</style>
+{% endblock %}
 
-    <ul class="m-1">
-      <li>
-        사업자 등록번호는 최소 6자리를 포함해서 넣어주세요. ('-'문자 유무
-        상관없음.)
-      </li>
-      <li>회사명은 유사도 검색으로 찾을 회사명입니다.</li>
-      <li>
-        필수 키워드는 무조건 들어갈 것 같은 단어를 넣어 검색할 수 있습니다. 필수 X
-      </li>
-    </ul>
+{% block content %}
+<form action="{% url 'main:index' %}" method="GET">
+  <div class="m-1">
+    <label>
+      사업자등록번호
+      <input
+        name="registration_number"
+        value="{{ registration_number }}"
+        style="width: 500px"
+        required="true"
+      />
+    </label>
+  </div>
+  <div class="m-1">
+    <label>
+      회사명
+      <input
+        name="registration_name"
+        value="{{ registration_name }}"
+        style="width: 500px"
+        required="true"
+      />
+    </label>
+  </div>
+  <div class="m-1">
+    <label>
+      필수 키워드
+      <input name="keyword" value="{{ keyword }}" style="width: 500px" />
+    </label>
+  </div>
+  <div class="m-1">
+    <button type="submit">검색</button>
+  </div>
+</form>
 
-    <hr />
+<ul class="m-1">
+  <li>
+    사업자 등록번호는 최소 6자리를 포함해서 넣어주세요. ('-'문자 유무
+    상관없음.)
+  </li>
+  <li>회사명은 유사도 검색으로 찾을 회사명입니다.</li>
+  <li>
+    필수 키워드는 무조건 들어갈 것 같은 단어를 넣어 검색할 수 있습니다. 필수 X
+  </li>
+</ul>
 
-    <div class="m-1">
-      {% for company in company_list %}
-      <p>
-          {% for label, value in company %}
-            {% if label == 'name' %}
-              <button onclick="copyToClipboard('{{ value }}')" class="btn">복사하기</button>
-            {% endif %}
-            
-            {{ label }} : {{ value }},
-          {% endfor %}
-        </p>
-      {% empty %}
-        {% if registration_number != '' and registration_name != '' %}
-          <h3> 검색결과가 없습니다.</h3>
-          <p> 사업자등록번호 또는 키워드가 올바른지 확인해주세요. </p>
+<hr />
+
+<div class="m-1">
+  {% for company in company_list %}
+  <p>
+      {% for label, value in company %}
+        {% if label == 'name' %}
+          <button onclick="copyToClipboard('{{ value }}')" class="btn">복사하기</button>
         {% endif %}
+        
+        {{ label }} : {{ value }},
       {% endfor %}
-    </div>
+    </p>
+  {% empty %}
+    {% if registration_number != '' and registration_name != '' %}
+      <h3> 검색결과가 없습니다.</h3>
+      <p> 사업자등록번호 또는 키워드가 올바른지 확인해주세요. </p>
+    {% endif %}
+  {% endfor %}
+</div>
 
-    <script>
-      function copyToClipboard(str) {
-        const t = document.createElement("textarea");
-        document.body.appendChild(t);
-        t.value = str;
-        t.select();
-        document.execCommand("copy");
-        document.body.removeChild(t);
-      }
-    </script>
-  </body>
-</html>
+{% endblock %}
+
+
+{% block script %}
+<script>
+  function copyToClipboard(str) {
+    const t = document.createElement("textarea");
+    document.body.appendChild(t);
+    t.value = str;
+    t.select();
+    document.execCommand("copy");
+    document.body.removeChild(t);
+  }
+</script>
+{% endblock %}
