@@ -116,7 +116,6 @@ def update_pension_company():
         bulk_pension_companies = []
     
         print("Pension Company Data Reload Start!")
-        PensionCompany.objects.all().delete()
     
         for idx, row in enumerate(csv_file):
             if idx == 0:
@@ -131,10 +130,10 @@ def update_pension_company():
                 data_created_at = row[0],
             )
             
-            pension_company.save()
-            # bulk_pension_companies.append(pension_company)
+            bulk_pension_companies.append(pension_company)
             
-        # PensionCompany.objects.create(bulk_pension_companies)
+        PensionCompany.objects.all().delete()
+        PensionCompany.objects.bulk_create(bulk_pension_companies, 400)
 
         print("Pension Company Data Reload Complete!")
 
