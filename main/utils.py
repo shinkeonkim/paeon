@@ -88,13 +88,17 @@ def get_similar_company_list_by_registration_from_pension_company(registration_n
 
     return result
 
-def download_company_csv():    
+def download_company_csv():
+    print("File Download Start!")
+
     with open(DOWNLOAD_FILENAME, 'wb') as file:
         response = requests.get("https://www.data.go.kr/catalog/15083277/fileData.json")
         csv_url = response.json()['distribution'][0]['contentUrl']
         
         response = requests.get(csv_url)
         file.write(response.content)
+    
+    print("File Download Complete!")
 
 
 # ['자료생성년월', ' 사업장명', ' 사업자등록번호', ' 사업장가입상태코드 1 등록 2 탈퇴', ' 우편번호', ' 사업장지번상세주소', ' 사업장도로명상세주소', ' 고객법정동주소코드', ' 고객행정동주소코드', ' 법정동주소광역시도코드', ' 법정동주소광역시시군구코드', ' 법정동주소광역시시군구읍면동코드', ' 사업장형태구분코드 1 법인 2 개인', ' 사업장업종코드', ' 사업장업종코드명', ' 적용일자', ' 재등록일자', ' 탈퇴일자', ' 가입자수', ' 당월고지금액', ' 신규취득자수', ' 상실가입자수']
@@ -103,6 +107,8 @@ def update_pension_company():
         csv_file = csv.reader(file)
         
         bulk_pension_companies = []
+    
+        print("Pension Company Data Reload Start!")
     
         for idx, row in enumerate(csv_file):
             if idx == 0:
@@ -121,6 +127,9 @@ def update_pension_company():
             
         PensionCompany.objects.all().delete()
         PensionCompany.objects.bulk_create(bulk_pension_companies)
+
+        print("Pension Company Data Reload Complete!")
+
 
 def delete_csv_file():
     os.remove(DOWNLOAD_FILENAME)

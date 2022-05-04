@@ -7,4 +7,3 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         reload_pension_company()
         self.stdout.write(self.style.SUCCESS('Success'))
-
