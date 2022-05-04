@@ -106,9 +106,8 @@ def update_pension_company():
     
         for idx, row in enumerate(csv_file):
             if idx == 0:
-                print(row)
                 continue
-            
+
             pension_company = PensionCompany(
                 name = row[1],
                 registration_number = row[2],
