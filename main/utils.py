@@ -71,7 +71,7 @@ def get_similar_company_list_by_registration_from_pension_company(registration_n
     registration_number = registration_number.strip()
     keyword = (keyword or "").strip()
     
-    registration_number = parse_registration_number(registration_number)
+    registration_number = parse_registration_number(registration_number)[:6]
     
     result = [*PensionCompany.objects.filter(registration_number = registration_number).values(
         'name',
