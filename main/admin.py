@@ -10,3 +10,4 @@ class PensionCompanyAdmin(admin.ModelAdmin):
         'registration_number',
         'data_created_at'
     ]
+    search_fields = list_display
