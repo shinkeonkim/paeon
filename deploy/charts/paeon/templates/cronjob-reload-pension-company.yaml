@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.fullnameOverride }}-reload-pension-company
+spec:
+  schedule: {{ .Values.reload.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: reload-pension-company
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              command: ["python", "manage.py", "reload_pension_company"]
+              envFrom:
+                - secretRef:
+                    name: {{ .Values.secretName }}

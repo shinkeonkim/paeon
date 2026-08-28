@@ -1,0 +1,6 @@
+apiVersion: v2
+name: paeon
+description: 사업자등록번호로 정확한 상호명을 추려주는 사이트 (Django + Postgres)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
