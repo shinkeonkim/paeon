@@ -4,7 +4,9 @@ metadata:
   name: {{ .Values.fullnameOverride }}
   annotations:
     kubernetes.io/ingress.class: traefik
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # 실제 클러스터의 ClusterIssuer 이름은 letsencrypt-prod가 아니라 cloudflare-dns01이다
+    # (kubectl get clusterissuer로 확인, 2026-08-28).
+    cert-manager.io/cluster-issuer: cloudflare-dns01
 spec:
   rules:
     - host: {{ .Values.domain | quote }}
