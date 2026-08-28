@@ -1,0 +1,14 @@
+fullnameOverride: paeon
+domain: paeon.xn--hy1by51c.kr
+
+image:
+  repository: ghcr.io/shinkeonkim/paeon
+  tag: latest
+
+replicaCount: 1
+
+secretName: paeon-secrets
+
+reload:
+  # 국민연금공단 사업장가입내역 공개 데이터는 월 단위로 갱신된다.
+  schedule: "0 3 1 * *"
