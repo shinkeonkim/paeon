@@ -35,9 +35,18 @@ spec:
             httpGet:
               path: /
               port: 8000
+              # kubelet은 파드 IP로 직접 요청하며 Host 헤더도 그 IP로 보낸다 —
+              # ALLOWED_HOSTS에 없는 호스트라 지정 안 하면 Django가 400을 반환해
+              # 계속 재시작에 빠진다(CrashLoopBackOff). 도메인으로 덮어써서 통과시킨다.
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.domain | quote }}
             initialDelaySeconds: 5
           livenessProbe:
             httpGet:
               path: /
               port: 8000
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.domain | quote }}
             initialDelaySeconds: 15
