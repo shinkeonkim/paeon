@@ -30,6 +30,8 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name == 'push' }}
-          tags: ghcr.io/shinkeonkim/paeon:${{ github.sha }}
+          tags: |
+            ghcr.io/shinkeonkim/paeon:latest
+            ghcr.io/shinkeonkim/paeon:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
